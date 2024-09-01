@@ -5,7 +5,7 @@ import org.jetbrains.exposed.dao.IntEntity
 import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 
-class Item(id: EntityID<Int>) : IntEntity(id) {
+class Item(id: EntityID<Int>) : IntEntity(id) {  //две соседние остановки и маршрут между ними
     var order by Items.order
     var direction by Items.direction
 

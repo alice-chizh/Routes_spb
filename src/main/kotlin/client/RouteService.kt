@@ -9,7 +9,7 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 
 object RouteService {
-    suspend fun getAllRoutes(): List<RouteId> {
+    suspend fun getAllRoutes(): List<RouteId> { //получает с API транспорта спб все маршруты
         val url = "https://nts-admin.orgp.spb.ru/api/visary/operator/route"
 
         val routeIds = mutableListOf<RouteId>()
@@ -35,7 +35,7 @@ object RouteService {
         return routeIds
     }
 
-    suspend fun getRouteById(id: Int): RouteInfo {
+    suspend fun getRouteById(id: Int): RouteInfo {  //получает маршрут по id
         val urlByRoute = "https://nts-admin.orgp.spb.ru/api/visary/stop/byRoutes?routesId=$id"
         return client.get(urlByRoute).body<List<RouteInfo>>().first()
     }

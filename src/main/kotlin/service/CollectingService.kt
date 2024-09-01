@@ -6,7 +6,9 @@ import database.entity.Route
 import database.entity.RouteStop
 import database.entity.Stop
 import database.table.Routes
+import database.table.Stops
 import org.jetbrains.exposed.sql.and
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object CollectingService {
@@ -60,16 +62,8 @@ object CollectingService {
         }
 
         transaction {
-            val tram48 = Route.find { Routes.name eq "48" and (Routes.transportType eq "tram") }.single()
-            val stops48 = tram48.stops
-            for (stop in stops48) {
-                println("${stop.latitude} ${stop.longitude}")
-                print("На этой остановке еще есть: ")
-                for (anotherRoute in stop.routes) {
-                    print(anotherRoute.transportType + " " + anotherRoute.name + "; ")
-                }
-                println()
-            }
+             val countStops = Stops.selectAll().count()
+             println("$countStops")
         }
     }
 }

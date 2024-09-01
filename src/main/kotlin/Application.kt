@@ -2,9 +2,14 @@ import database.table.Items
 import database.table.RouteStops
 import database.table.Routes
 import database.table.Stops
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
+import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import server.mainPage
+import server.nearby
 import service.CollectingService
 
 suspend fun main() {
@@ -15,4 +20,11 @@ suspend fun main() {
     }
 
     CollectingService.collect()
+
+    embeddedServer(Netty, port = 8080) {
+        routing {
+            nearby()
+            mainPage()
+        }
+    }.start(wait = true)
 }

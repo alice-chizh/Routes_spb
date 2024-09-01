@@ -44,6 +44,8 @@ dependencies {
 
     implementation("com.h2database:h2:2.1.214")
 
+    implementation("io.github.piruin:geok-jvm:1.2.2")
+
     testImplementation("io.ktor:ktor-server-tests-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
